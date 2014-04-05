@@ -3,7 +3,7 @@ class OntologyStatement < ActiveRecord::Base
   has_many :ontology_raw_changes, :dependent => :restrict
   has_many :ontology_changes, :through => :ontology_raw_changes 
   validates_presence_of :text
-  
+ 
   def indented_text
     indent_size = 4
     space = ' '

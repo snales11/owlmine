@@ -1,13 +1,37 @@
+require 'redmine'
+
+ActionDispatch::Callbacks.to_prepare do 
+  require_dependency 'change'
+  unless Change.included_modules.include? Owlmine::ChangePatch
+    Change.send(:include, Owlmine::ChangePatch)
+  end
+end
+
 Redmine::Plugin.register :owlmine do
   name 'Owlmine plugin'
   author 'utapyngo'
   description 'Shows history of OWL ontologies and OWL entities'
-  version '0.0.1'
+  version '0.1'
   
   #permission :ontologies, { :ontologies => [:index] }, :public => true
-  menu :project_menu, :owlmine, { :controller => 'owlmine', :action => 'entities' }, :caption => 'Owlmine', :before => :repository, :param => :project_id
+
+  settings(:partial => 'settings/owlmine_settings',
+           :default => {
+             'files' => /\.(owl|rdf|ttl|n3)$/
+           })
+
+  menu(:project_menu,
+       :owlmine,
+       { :controller => 'owlmine', :action => 'entities' },
+       :caption => 'OWL Entities',
+       :before => :repository,
+       :param => :project_id,
+       :if => Proc.new {
+         User.current.allowed_to?(:view_owl_entities, nil, :global => true)
+       }
+  )
   
   project_module :owlmine do
-    permission :view_owlmine, :owlmine => [:entities, :entity]
+    permission :view_owl_entities, :owlmine => [:entities, :entity]
   end
 end

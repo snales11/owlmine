@@ -1,0 +1,25 @@
+- content_for :header_tags do
+  = stylesheet_link_tag 'owlmine.css', :plugin => 'owlmine'
+
+%h2.title= "#{@entity.entity_type}: #{@entity.uri}"
+- @entity.ontology_entity_changes.each do |entity_change|
+  %div{ :class => 'box ' + action_css_class(entity_change.action) }
+    = action_string(entity_change.action)
+    - if entity_change.ontology_change
+      = "in"
+      = link_to "#{entity_change.ontology_change.change.changeset.revision}" + |
+                ":#{entity_change.ontology_change.change.changeset.scmid}",    |
+        url_for(:controller => :repositories, :action => :revision, :id => @project.id,
+                :rev => entity_change.ontology_change.change.changeset.scmid)
+      = ':'
+      = link_to "#{entity_change.ontology_change.change.path}",
+        url_for(:controller => :repositories, :action => :entry, :id => @project.id,
+                :rev => entity_change.ontology_change.change.changeset.scmid,
+                :path => entity_change.ontology_change.change.path)
+    - if entity_change.ontology_raw_changes
+      %div
+        - entity_change.ontology_raw_changes.each do |raw_change|
+          %span{ :style => "display:block;", 
+                 :class => [:raw_change, action_css_class(raw_change.action)] }
+            -#= raw h("#{raw_change.action} #{raw_change.ontology_statement.indented_text}").gsub(/ (?= )/, '&nbsp;').gsub(/\n/, '<br />')
+            = raw h("#{raw_change.action} #{entity_change.ontology_change.format_statement(raw_change.ontology_statement, :qname, :parenthesis)}").gsub(/ (?= )/, '&nbsp;').gsub(/\n/, '<br />')

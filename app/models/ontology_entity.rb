@@ -7,6 +7,7 @@ class OntologyEntity < ActiveRecord::Base
   validates_presence_of :uri
   
   def shortname
+    puts @uri
     uri = URI(@uri)
     if uri.fragment
       uri.fragment

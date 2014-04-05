@@ -5,5 +5,5 @@ class OntologyRawChange < ActiveRecord::Base
   has_and_belongs_to_many :ontology_entity_changes
   validates_associated :ontology_change
   validates_associated :ontology_statement
-  validates_inclusion_of :action, :in => %w(- +)
+  validates_inclusion_of :action, :in => %w(- + * #)
 end

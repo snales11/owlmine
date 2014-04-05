@@ -1,0 +1,8 @@
+%h2.title Ontology Entities
+- @entities_by_type.keys.each do |entity_type|
+  %h3.title= pluralize(@entities_by_type[entity_type].length, entity_type)
+  - @entities_by_type[entity_type].each do |entity|
+    %pre= link_to entity.uri,                      |
+                  url_for(:controller => :owlmine, |
+                          :action => :entity,      |
+                          :entity_id => entity.id) |

@@ -1,0 +1,15 @@
+%h2.title Ontology Entities
+- @entities.each do |entity|
+  %pre= "#{entity.typ}: #{entity.uri}"
+  - entity.ontology_entity_changes.each do |entity_change|
+    %p
+      = action_string(entity_change.action)
+      - if entity_change.ontology_change
+        = "in #{entity_change.ontology_change.change.changeset.scmid}:#{entity_change.ontology_change.change.path}"
+    - if entity_change.ontology_raw_changes
+      %div
+        - entity_change.ontology_raw_changes.each do |raw_change|
+          %pre
+            = raw_change.action
+            = raw_change.ontology_statement.text
+  %hr
