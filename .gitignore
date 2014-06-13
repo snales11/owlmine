@@ -3,7 +3,6 @@
 .bundle
 .config
 .yardoc
-Gemfile.lock
 InstalledFiles
 _yardoc
 coverage
@@ -14,5 +13,22 @@ rdoc
 spec/reports
 test/tmp
 test/version_tmp
-tmp
 export.cmd
+
+# Added by GitHub
+capybara-*.html
+.rspec
+/log
+/tmp
+/db/*.sqlite3
+/public/system
+/coverage/
+/spec/tmp
+**.orig
+rerun.txt
+pickle-email-*.html
+config/initializers/secret_token.rb
+config/secrets.yml
+/.bundle
+/vendor/bundle
+.rvmrc
