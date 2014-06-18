@@ -1,5 +1,5 @@
 %h2.title Ontology Entities
-- @entities.each do |entity|
+- @entities.each do |entity|   #цикл перебирает все сущности
   %pre= "#{entity.typ}: #{entity.uri}"
   - entity.ontology_entity_changes.each do |entity_change|
     %p

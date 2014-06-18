@@ -1,10 +1,11 @@
+- # Для 1 ревизии выводит отличия от предыдущей(только для онтологии)
 - content_for :header_tags do
-  = stylesheet_link_tag 'owlmine.css', :plugin => 'owlmine'
+  = stylesheet_link_tag 'owlmine.css', :plugin => 'owlmine' #css и плагин
 
 %h2.title= "Revision #{@diff_format_revisions} #{@path}"
 - if @ontology_change
   - @ontology_change.ontology_raw_changes.each do |raw_change|
     %div{ :class => [:raw_change, action_css_class(raw_change.action)] }
-      -#= raw h("#{raw_change.action} #{raw_change.ontology_statement.indented_text}").gsub(/ (?= )/, '&nbsp;').gsub(/\n/, '<br />')
-      = raw h("#{raw_change.action} #{@ontology_change.format_statement(raw_change.ontology_statement, :qname, :parenthesis)}").gsub(/ (?= )/, '&nbsp;').gsub(/\n/, '<br />')
+      = raw h("#{raw_change.action} #{raw_change.ontology_statement.indented_text}").gsub(/ (?= )/, '&nbsp;').gsub(/\n/, '<br />')
+      -#= raw h("#{raw_change.action} #{@ontology_change.format_statement(raw_change.ontology_statement, :qname, :parenthesis)}").gsub(/ (?= )/, '&nbsp;').gsub(/\n/, '<br />')
       

@@ -1,4 +1,6 @@
 require 'redmine'
+require 'haml'
+require_dependency 'owlmine/hooks'
 
 ActionDispatch::Callbacks.to_prepare do 
   require_dependency 'change'

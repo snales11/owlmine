@@ -9,8 +9,7 @@
       = "in"
       = link_to "#{entity_change.ontology_change.change.changeset.revision}" + |
                 ":#{entity_change.ontology_change.change.changeset.scmid}",    |
-        url_for(:controller => :repositories, :action => :revision, :id => @project.id,
-                :rev => entity_change.ontology_change.change.changeset.scmid)
+        url_for(:controller => :repositories, :action => :revision, :id => @project.id, :rev => entity_change.ontology_change.change.changeset.scmid)
       = ':'
       = link_to "#{entity_change.ontology_change.change.path}",
         url_for(:controller => :repositories, :action => :entry, :id => @project.id,
